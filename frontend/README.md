@@ -26,8 +26,8 @@ def index():
 ## 启动
 
 ```powershell
-cd C:\Users\李斌\PycharmProjects\PythonProject2
-.\.venv\Scripts\uvicorn.exe backend.main:app --host 127.0.0.1 --port 8000 --reload
+# 在项目根目录（含 backend/、frontend/ 的那一层）执行
+uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
 浏览器打开 <http://127.0.0.1:8000/>。接口文档仍在 <http://127.0.0.1:8000/docs>。
