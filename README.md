@@ -73,8 +73,8 @@
 **环境**：Python 3.11+（开发用 3.14）。嵌入模型首次运行会从 HF 镜像下载约 100 MB。
 
 ```bash
-git clone https://github.com/<你的用户名>/<仓库名>.git
-cd <仓库名>
+git clone https://github.com/libin-rag/rag-doc-qa.git
+cd rag-doc-qa
 pip install -r requirements.txt
 ```
 
