@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>智能知识助理 · RAG 问答</title>
+<link rel="stylesheet" href="/static/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+<div class="app">
+  <!-- ============ 侧边栏 ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__head">
+      <span class="logo">📚</span>
+      <span class="logo-text">知识库</span>
+    </div>
+
+    <section class="panel">
+      <div class="panel__title">文档</div>
+      <label class="drop" id="drop">
+        <input type="file" id="file-input" multiple accept=".pdf,.txt,.docx" hidden>
+        <span class="drop__icon">＋</span>
+        <span>选择文件，或拖到这里</span>
+        <small>支持 PDF / TXT / DOCX</small>
+      </label>
+      <ul class="doc-list" id="doc-list"></ul>
+      <button class="btn btn--ghost btn--sm" id="clear-docs" type="button">清空知识库</button>
+    </section>
+
+    <section class="panel">
+      <div class="panel__title">推理设置</div>
+      <label class="field">
+        <span>生成后端</span>
+        <select id="backend">
+          <option value="cloud">云端 DashScope</option>
+          <option value="local">本地 Ollama</option>
+        </select>
+      </label>
+      <label class="field" id="model-field">
+        <span>模型</span>
+        <select id="model-cloud">
+          <option value="qwen-turbo">qwen-turbo</option>
+          <option value="qwen-plus" selected>qwen-plus</option>
+          <option value="qwen-max">qwen-max</option>
+        </select>
+        <input id="model-local" class="hidden" value="qwen2.5:7b-instruct-q4_K_M">
+      </label>
+      <button class="btn btn--ghost btn--sm" id="test-backend" type="button">测试连通性</button>
+    </section>
+
+    <section class="panel panel--meta" id="health-panel">
+      <div class="panel__title">运行状态</div>
+      <div class="meta-row"><span>向量库</span><b id="m-chunks">—</b></div>
+      <div class="meta-row"><span>嵌入模型</span><b id="m-embed">—</b></div>
+      <div class="meta-row"><span>块长 / 重叠</span><b id="m-chunk">—</b></div>
+      <div class="meta-row"><span>Top-K</span><b id="m-topk">—</b></div>
+      <div class="meta-row"><span>云端 Key</span><b id="m-key">—</b></div>
+      <div class="meta-row"><span>后端地址</span><b id="m-url">—</b></div>
+    </section>
+
+    <div class="sidebar__foot">
+      <a href="/docs" target="_blank" rel="noreferrer">接口文档 ↗</a>
+    </div>
+  </aside>
+
+  <!-- ============ 主区 ============ -->
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="toggle-sidebar" type="button" aria-label="菜单">☰</button>
+      <div class="topbar__text">
+        <h1>🤖 智能知识助理</h1>
+        <p id="subtitle">正在连接后端…</p>
+      </div>
+      <div class="topbar__actions">
+        <button class="btn btn--ghost" id="new-chat" type="button">新建对话</button>
+      </div>
+    </header>
+
+    <div class="chat" id="chat">
+      <div class="empty" id="empty">
+        <div class="empty__title">开始提问吧</div>
+        <div class="empty__hint">答案只来自你上传的文档；文档里没有的，会直接说“没有”。</div>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="msgs" id="msgs"></div>
+    </div>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <textarea id="input" rows="1" placeholder="输入您的问题，例如：下周三可以远程办公吗？" aria-label="问题"></textarea>
+      <button class="send" type="submit" id="send">发送</button>
+    </form>
+  </main>
+</div>
+
+<div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+<script type="module" src="/static/app.js"></script>
+</body>
+</html>

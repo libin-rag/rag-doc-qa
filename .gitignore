@@ -1,0 +1,46 @@
+# ── Python ────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# ── 虚拟环境 ──────────────────────────────
+.venv/
+venv/
+env/
+
+# ── IDE ───────────────────────────────────
+.idea/
+.vscode/
+*.iml
+
+# ── 运行时产物 ────────────────────────────
+# 向量库：体积大且可重建，不入库
+chroma_db/
+eval/chroma_eval/
+# 每次跑评测新生成的结果；已判分的基线结果单独提交为 results_baseline.csv
+eval/eval_results.csv
+eval/*.json
+
+# ── 密钥与本地配置 ────────────────────────
+.env
+.env.*
+.streamlit/secrets.toml
+*.key
+*.pem
+
+# ── 系统 ──────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+
+# ── 本地私有材料（不发布）─────────────────
+# 只忽略项目根下的同名文件；eval/ 里的题库副本仍需提交
+/README.private.md
+/前后端拆分说明.md
+/app10.py
+/app2.py
+/app_ollama_backup.py
+/questions_hard.csv
